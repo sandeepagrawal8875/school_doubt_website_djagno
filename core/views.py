@@ -110,3 +110,27 @@ class QuestionUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
         return data 
 
 
+
+class AnswerDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Answer
+    template_name = "core/answer_delete.html"
+    success_url = reverse_lazy('home')
+
+    def test_func(self):
+        return self.get_object().answer_by.user == self.request.user
+
+class AnswerUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+    model = Answer
+    fields = ['answer',]
+    template_name = "core/answer_update.html"
+    success_url = reverse_lazy('home')
+    
+    def test_func(self):
+        return self.get_object().answer_by.user == self.request.user
+
+    def get_context_data(self, **kwargs):
+        data = super(AnswerUpdateView, self).get_context_data(**kwargs)
+        hot_que = Question.objects.all().order_by('-id')[:5]
+
+        data['hot_que'] = hot_que
+        return data 

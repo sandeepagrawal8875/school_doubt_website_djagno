@@ -89,7 +89,10 @@
                     <p class="text-muted text-sm"><i class="fa fa-clock-o fa-lg"></i> {{ans.create_at}}</p>
                   </div>
                   <p>{{ans.answer}}</p>
-
+                    {% if ans.answer_by.user == request.user %}
+										<a href="{% url 'ans_delete' ans.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float: right;" src="{% static 'icon/i-blue-delete.png' %}" /><a>
+										<a href="{% url 'ans_update' ans.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float: right;" src="{% static 'icon/i-edit.png' %}" /><a>
+										{% endif %}
                 </div>
               </div>
               <!-- Reply Grid End -->
