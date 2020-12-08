@@ -1,0 +1,101 @@
+﻿{% extends 'core/base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- =-=-=-=-=-=-= Latest Questions  =-=-=-=-=-=-= -->
+<section class="white question-tabs padding-bottom-80" id="latest-post">
+	<div class="container">
+		<div class="row">
+			<!-- Content Area Bar -->
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<!-- Tabs -->
+						<ul class="nav panel-tabs">
+							<li> <a data-toggle="tab" href="#tab1"><i class="icofont icon-ribbon"></i><span class="hidden-xs">Recent Questions</span></a> 
+							</li>
+							<li> <a data-toggle="tab" href="#tab2"><i class="icofont icon-layers"></i><span class="hidden-xs">Popular Responses</span></a> 
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="tab-content">
+						<div id="tab1" class="tab-pane active">
+							{% for question in recent_que %}
+							<!-- Question Listing -->
+							<div class="listing-grid">
+								<div class="row">
+									<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+										<a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
+											<img alt="" class="img-responsive center-block" src="{{question.user.image.url}}">
+										</a>
+									</div>
+									<div class="col-md-7 col-sm-8  col-xs-12">
+										<h3><a href="{% url 'detail' question.id %}">{{question.question_title}}</a></h3>
+										<div class="listing-meta">
+											 <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{question.user.user.username}}</span>
+											 <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{question.create_at}}</span>
+											 <span><i class="fa fa fa-eye" aria-hidden="true"></i>{{question.views}} views</span> 
+										</div>
+									</div>
+									
+									<div class="col-md-10 col-sm-10  col-xs-12">
+										<p>{{question.description|truncatewords:30}}</p>
+										{% if question.user.user == request.user %}
+										<a href="{% url 'delete' question.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float:right;" src="{% static 'icon/i-blue-delete.png' %}" /><a>
+										<a href="{% url 'update' question.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float:right;" src="{% static 'icon/i-edit.png' %}" /><a>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+							<!-- Question Listing End -->
+							{% endfor %}
+						</div>
+						<div id="tab2" class="tab-pane">
+							{% for question in most_viewed_que %}
+							<!-- Question Listing -->
+							<div class="listing-grid">
+								<div class="row">
+									<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+										<a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
+											<img alt="" class="img-responsive center-block" src="{{question.user.image.url}}">
+										</a>
+									</div>
+									<div class="col-md-7 col-sm-8  col-xs-12">
+										<h3><a href="{% url 'detail' question.id%}">{{question.question_title}}</a></h3>
+										<div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{question.create_at}}</span>  <span><i class="fa fa fa-eye" aria-hidden="true"></i>{{question.views}} views</span> 
+										</div>
+									</div>
+									
+									<div class="col-md-10 col-sm-10  col-xs-12">
+										<p>{{question.description|truncatewords:100}}</p>
+										{% if question.user.user == request.user %}
+										<a href="{% url 'delete' question.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float:right;" src="{% static 'icon/i-blue-delete.png' %}" /><a>
+										<a href="{% url 'update' question.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float:right;" src="{% static 'icon/i-edit.png' %}" /><a>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+							<!-- Question Listing End -->
+							{% endfor %}
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- end container -->
+</section>
+<!-- =-=-=-=-=-=-= Latest Questions  End =-=-=-=-=-=-= -->
+
+
+
+
+
+
+{% endblock %}

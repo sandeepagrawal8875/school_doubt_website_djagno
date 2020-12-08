@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Copied from http://templates.scriptsbundle.com/knowledge/demo/ by Cyotek WebCopy 1.7.0.600, Saturday, September 7, 2019, 5:09:28 AM -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="ScriptsBundle">
+    <title>school doubt</title>
+    <!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/et-line-fonts.css' %}">
+        <!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.style.css' %}">
+    <!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+    <!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
+    <link type="text/css" rel="Stylesheet" href="{% static 'css/styles/shCoreDefault.css' %}">
+    <!-- =-=-=-=-=-=-= Css Animation =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <!-- =-=-=-=-=-=-= Hover Dropdown =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-dropdownhover.min.css' %}">
+    <!-- JavaScripts -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+  
+</head>
+
+<body>
+	<!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
+	<div class="preloader"><span class="preloader-gif"></span>
+	</div>
+	<!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
+	<div class="top-bar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
+					<ul class="top-nav nav-left">
+						<li><a href="{% url 'home' %}">Home</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
+					<ul class="top-nav nav-right">
+						{% if not request.user.is_authenticated %}
+						<li><a href="{% url 'login' %}"><i class="fa fa-lock" aria-hidden="true"></i>Login</a>
+						</li>
+						<li><a href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
+						</li>
+						{% else %}
+						<li class="dropdown"> 
+							<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">
+								<img class="img-circle resize" alt="" src="{{request.user.profile.image.url}}">
+								<span class="hidden-xs small-padding">
+									<span>{{request.user.username}}</span>
+								<i class="fa fa-caret-down"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu ">
+								<li><a href="{% url 'profile' %}"><i class=" icon-bargraph"></i> Profile</a></li>
+								<li><a href="{% url 'update_profile' %}"><i class=" icon-gears"></i> Update Profile</a></li>
+								<li><a href="{% url 'create' %}"><i class="icon-heart"></i> Questions</a></li>
+								<li><a href="{% url 'logout' %}"><i class="icon-lock"></i> Logout</a></li>
+							</ul>
+							<li>
+								<div ><a href="{% url 'create' %}" class="btn btn-primary btn-sm">Post Question</a>
+								</div>
+							</li>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- =-=-=-=-=-=-= HOME =-=-=-=-=-=-= -->
+
+	<!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+	<div class="main-content-area">
+		{% block content %}
+		{% endblock %}
+		  
+	</div>
+
+	<!-- =-=-=-=-=-=-= FOOTER =-=-=-=-=-=-= -->
+  <footer class="footer-area">
+
+    <!--Footer Upper-->
+    <div class="footer-content">
+      <div class="container">
+        <div class="row clearfix">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="footer-content text-center no-padding margin-bottom-40">
+              <div class="logo-footer"><img id="logo-footer" class="center-block" src="images/logo-1.png" alt="">
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus illo vel dolorum soluta consectetur doloribus sit. Delectus non tenetur odit dicta vitae debitis suscipit doloribus. Lorem ipsum dolor sit amet, illo vel.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!--Footer Bottom-->
+    <div class="footer-copyright">
+      <div class="auto-container clearfix">
+        <!--Copyright-->
+        <div class=" text-center">Copyright 2016 All Rights Reserved</div>
+      </div>
+    </div>
+  </footer>
+	<!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core Css  -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Smooth Scroll  -->
+    <script src="{% static 'js/jquery.smoothscroll.js' %}"></script>
+    <!-- Jquery Easing -->
+    <script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+    <!-- Jquery Counter -->
+    <script src="{% static 'js/jquery.countTo.js' %}"></script>
+    <!-- Jquery Waypoints -->
+    <script src="{% static 'js/jquery.waypoints.js' %}"></script>
+    <!-- Jquery Appear Plugin -->
+    <script src="{% static 'js/jquery.appear.min.js' %}"></script>
+    <!-- Carousel Slider  -->
+    <script src="{% static 'js/carousel.min.js' %}"></script>
+    <!-- Jquery Parallex -->
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <!--Style Switcher -->
+    <script src="{% static 'js/bootstrap-dropdownhover.min.js' %}"></script>
+    <!-- Include jQuery Syntax Highlighter -->
+    <script type="text/javascript" src="{% static 'scripts/shCore.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/shBrushPhp.js' %}"></script>
+    <!-- Template Core JS -->
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+<!-- Copied from http://templates.scriptsbundle.com/knowledge/demo/ by Cyotek WebCopy 1.7.0.600, Saturday, September 7, 2019, 5:09:28 AM -->
+</html>

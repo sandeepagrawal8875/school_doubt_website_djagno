@@ -1,0 +1,161 @@
+﻿
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+            <h1>Question Detial</h1>
+          </div>
+          <!-- end col -->
+          <div class="col-md-6 col-sm-5 co-xs-12 text-right">
+            <div class="bread">
+              <ol class="breadcrumb">
+                <li><a href="{% url 'home' %}">Home</a>
+                </li>
+                
+                <li class="active">Question</li>
+              </ol>
+            </div>
+            <!-- end bread -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= Question Details =-=-=-=-=-=-= -->
+
+    <section class="section-padding-80 white question-details">
+      <div class="container">
+        <!-- Row -->
+        <div class="row">
+          <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+            <!-- Question Detail -->
+
+            <!-- Question Listing -->
+            <div class="listing-grid ">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <h3><a href="#"> {{question.question_title}} </a></h3>
+                  <div class="listing-meta">
+                     <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{question.user.user.username}}</span>
+                     <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{question.create_at}}</span>
+                     <span><i class="fa fa fa-eye" aria-hidden="true"></i> {{question.views}}</span> </div>
+                     
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <p>{{question.description}}</p>
+                  <div class="tagcloud">
+                    {% for tag in tag_list %}
+                     <a href="#">#{{tag}}</a> 
+                    {% endfor %}
+                    </div>
+                  {% if question.user.user == request.user %}
+										<a href="{% url 'delete' question.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float: right;" src="{% static 'icon/i-blue-delete.png' %}" /><a>
+										<a href="{% url 'update' question.id %}" ><img style="border:0; height:50px; width: 50px; padding:10px; float: right;" src="{% static 'icon/i-edit.png' %}" /><a>
+										{% endif %}
+                </div>
+              </div>
+            </div>
+            <!-- Question Listing End -->
+
+            <div class="clearfix"></div>
+            <!-- Thread Reply -->
+            <div class="thread-reply">
+              <h2>Reply </h2>
+
+              {% for ans in answer %}
+              <!-- Reply Grid -->
+              <div class="media-block card-box ribbon-content">
+
+                <div class="media-left">
+                  <a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
+                    <img class="img-sm" alt="Profile Picture" src="{{ans.answer_by.image.url}}">
+                  </a>
+
+                </div>
+                <div class="media-body">
+                  <div class="mar-btm">
+                    <h4><a href="#" class="btn-link text-semibold media-heading box-inline">{{ans.answer_by.user.username}}</a></h4>
+                    <p class="text-muted text-sm"><i class="fa fa-clock-o fa-lg"></i> {{ans.create_at}}</p>
+                  </div>
+                  <p>{{ans.answer}}</p>
+
+                </div>
+              </div>
+              <!-- Reply Grid End -->
+              {% endfor %}
+
+              <div class="clearfix"></div>
+
+              <form method="POST" >
+                {% csrf_token %}
+                <div class="form-group">
+                  <label>Post Your Answer</label>
+                  <textarea cols="12" rows="7" class="form-control" name="text" type="text" placeholder="Answer..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Post Answer</button>
+              </form>
+
+            </div>
+            <!-- Thread Reply End -->
+          </div>
+
+          <!-- Right Sidebar -->
+          <div class="col-md-4 col-sm-12 col-xs-12 clearfix">
+
+            <!-- sidebar -->
+            <div class="side-bar">
+              <div class="widget">
+                <div class="widget-image widget-image-sm"> <img alt="image" src="{{profile.image.url}}">
+                  <div class=" text-center"> 
+                    <h2><em>John Doe</em></h2>
+                    <h4><em>Graphic Designer</em></h4>
+                  </div>
+                </div>
+                <div class="widget-content border-bottom">
+                  <h4>About</h4>
+                  <p>{{profile.about}}</p>
+                </div>
+                <div class="widget-content">
+                  <div class="btn-group"> <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Facebook"><i class="fa fa-facebook fa-fw"></i></a> <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Twitter"><i class="fa fa-twitter fa-fw"></i></a> <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Google Plus"><i class="fa fa-google-plus fa-fw"></i></a> <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Pinterest"><i class="fa fa-pinterest fa-fw"></i></a> <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Dribbble"><i class="fa fa-dribbble fa-fw"></i></a> </div>
+                </div>
+              </div>
+
+              <!-- widget -->
+              <div class="widget">
+                <div class="recent-comments">
+                  <h2>Hot Questions</h2>
+                  <hr class="widget-separator no-margin">
+                  <ul>
+                    {% for que in hot_que %}
+                    <li><a href="{% url 'detail' que.id %}">{{que.question_title}}</a>
+                    </li>
+                    {% endfor %}
+                    
+                  </ul>
+                </div>
+              </div>
+              <!-- widget -->
+
+            </div>
+            <!-- sidebar end -->
+          </div>
+          <!-- Right Sidebar End -->
+
+        </div>
+        <!-- Row End -->
+      </div>
+    </section>
+    <!-- =-=-=-=-=-=-= Question Details end =-=-=-=-=-=-= -->
+
+{% endblock %}

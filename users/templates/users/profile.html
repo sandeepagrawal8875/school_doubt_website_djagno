@@ -1,0 +1,76 @@
+﻿{% extends 'users/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-7 col-xs-12 text-left">
+            <h1>User Profile</h1>
+          </div>
+          <!-- end col -->
+          <div class="col-md-6 col-sm-5 col-xs-12 text-right">
+            <div class="bread">
+              <ol class="breadcrumb">
+                <li><a href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="active">Profile</li>
+              </ol>
+            </div>
+            <!-- end bread -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= User Profile =-=-=-=-=-=-= -->
+    <section id="user-profile" class="user-profile parallex">
+      <div class="container">
+        <!-- Row -->
+        <div class="row">
+          <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="profile-sec ">
+              <div class="profile-head">
+                <div class="col-md-6 col-xs-12 col-sm-6 no-padding">
+                  <div class="profile-avatar">
+                    <span><img class="img-responsive img-circle" alt="" src="{{user.image.url}}"></span>
+                    <div class="profile-name">
+                      <h3>{{user.user.username}}</h3>
+                      <i>{{user.name}}</i>
+                      <i>{{user.field}}</i>
+                      <p>contact no : <i>{{user.phone_no}}</i> </p>
+                      <p>gender : <i>{{user.gender}}</i> </p>
+                      <p>current location : <i>{{user.location}}</i></p>
+                      <ul class="social-btns">
+                        <li><a href="#" title=""><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#" title=""><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li><a href="#" title=""><i class="fa fa-twitter"></i></a>
+                        </li>
+                      </ul>
+                      <p>{{user.about}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Profile Sec -->
+          </div>
+
+        </div>
+        <!-- Row End -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= User Profile end =-=-=-=-=-=-= -->
+
+{% endblock %}
